@@ -1,0 +1,9 @@
+<div *ngIf="loading">در حال بارگذاری...</div>
+
+<div class="products-container" *ngIf="!loading">
+  <div *ngFor="let product of products" class="card">
+    <img [src]="product.image" alt="{{ product.title }}" class="w-25" />
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.description }}</p>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="p-4 border bg-light rounded w-50 mx-auto my-5">
+  <div class="mb-3">
+    <label for="firstName">نام:</label>
+    <input id="firstName" formControlName="firstName" class="form-control">
+    <div *ngIf="myForm.get('firstName')?.invalid && myForm.get('firstName')?.touched" class="text-danger">
+      نام الزامی است.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="lastName">نام خانوادگی:</label>
+    <input type="lastName" formControlName="lastName" class="form-control">
+    <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="text-danger">نام خانوادگی الزامی است.</div>
+
+  </div>
+
+  <div class="mb-3">
+    <label for="email">ایمیل:</label>
+    <input id="email" formControlName="email" class="form-control">
+    <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" class="text-danger">
+      ایمیل معتبر وارد کنید.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="phoneNumber">شماره موبایل:</label>
+    <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control">
+    <div *ngIf="myForm.get('phoneNumber')?.invalid && myForm.get('phoneNumber')?.touched" class="text-danger">شماره موبایل معتبر نیست</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">ارسال</button>
+</form>
