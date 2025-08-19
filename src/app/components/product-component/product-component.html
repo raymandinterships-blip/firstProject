@@ -1,1 +1,9 @@
-<p>product-component works!</p>
+<div class="customCard card d-flex flex-column gap-3 p-5">
+  <img [src]="product.image" alt="{{ product.title }}" class="imgProduct" />
+  <h3>{{ product.title }}</h3>
+  <p>{{ product.description }}</p>
+  <div class="buttonCard d-flex gap-3">
+    <button class="btn bg-secondary text-white w-50" (click)="onEdit()">✏️ Edit</button>
+    <button class="btn bg-danger text-white w-50" (click)="onDelete()">🗑️ Delete</button>
+  </div>
+</div>

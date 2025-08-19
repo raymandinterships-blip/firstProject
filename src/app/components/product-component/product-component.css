@@ -1,0 +1,17 @@
+.customCard{
+    width: 450px;
+    height: 450px;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonCard{
+    width: 100%;
+    
+    
+}
+.imgProduct{
+    width: 95%;
+    height: 200px;
+    border-radius: 8px;
+}

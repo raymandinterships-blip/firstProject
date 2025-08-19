@@ -1,90 +1,103 @@
 <div *ngIf="loading">در حال بارگذاری...</div>
 <!-- Open modal -->
-<button class="addBtn btn btn-primary " (click)="openModal()">Add Product</button>
+<button class="addBtn btn btn-primary" (click)="openModal()">Add Product</button>
 
 <!-- modal for create new product -->
 <div class="modal-backdrop" *ngIf="showModal">
   <div class="modal-box">
-    <h4> Add New Product</h4>
+    <h4>Add New Product</h4>
     <form #productForm="ngForm" (ngSubmit)="saveProduct()">
       <div class="mb-2">
         <label for="title">Title:</label>
         <input
-         [(ngModel)]="newProduct.title"
-         name="title"
-         placeholder="Title"
-         id="title" 
-         type="text"
-         class="form-control"
-         required
-         #title="ngModel">
-         <div class="text-danger" *ngIf="title.invalid && title.touched">Title is required</div>
+          [(ngModel)]="newProduct.title"
+          name="title"
+          placeholder="Title"
+          id="title"
+          type="text"
+          class="form-control"
+          required
+          #title="ngModel"
+        />
+        <div class="text-danger" *ngIf="title.invalid && title.touched">Title is required</div>
       </div>
       <div class="mb-2">
         <label for="description">Description:</label>
-        <input 
-         [(ngModel)]="newProduct.description" 
-         name="description" id="description"  
-         type="text" 
-         class="form-control" 
-         placeholder="Description"
-         required
-         #description="ngModel">
-         <div class="text-danger" *ngIf="description.invalid && description.touched">Description is required</div>
+        <input
+          [(ngModel)]="newProduct.description"
+          name="description"
+          id="description"
+          type="text"
+          class="form-control"
+          placeholder="Description"
+          required
+          #description="ngModel"
+        />
+        <div class="text-danger" *ngIf="description.invalid && description.touched">
+          Description is required
+        </div>
       </div>
     </form>
     <div class="modalBtn d-flex gap-3 mt-5">
-      <button class="btn btn-success w-25" type="submit" (click)="saveProduct()" [disabled]="productForm.invalid">Add</button>
+      <button
+        class="btn btn-success w-25"
+        type="submit"
+        (click)="saveProduct()"
+        [disabled]="productForm.invalid"
+      >
+        Add
+      </button>
       <button class="btn btn-secondary w-25" (click)="closeModal()">Cancel</button>
     </div>
   </div>
 </div>
 
-
-
-
 <!-- edit modal -->
- <div class="modal-backdrop" *ngIf="showEditModal">
+<div class="modal-backdrop" *ngIf="showEditModal">
   <div class="modal-box">
     <h4>Edit Product</h4>
     <form #editForm="ngForm">
       <div class="mb-2">
         <label for="edit-title">Edit title</label>
-        <input 
-        id="edit-title" 
-        [(ngModel)]="editProductData.title" 
-        type="text"
-        name="title"
-        class="form-control"
-        #title="ngModel"
-        required>
+        <input
+          id="edit-title"
+          [(ngModel)]="editProductData.title"
+          type="text"
+          name="title"
+          class="form-control"
+          #title="ngModel"
+          required
+        />
         <div class="text-danger" *ngIf="title.invalid && title.touched">Title is required</div>
       </div>
       <div class="mb-2">
         <label for="edit-descript">Edit description</label>
-        <input 
-        id="edit-descript" 
-        name="description"
-        [(ngModel)]="editProductData.description" 
-        type="text"
-        class="form-control"
-        #description="ngModel"
-        required >
-        <div class="text-danger" *ngIf="description.invalid && description.touched">Description is required</div>
+        <input
+          id="edit-descript"
+          name="description"
+          [(ngModel)]="editProductData.description"
+          type="text"
+          class="form-control"
+          #description="ngModel"
+          required
+        />
+        <div class="text-danger" *ngIf="description.invalid && description.touched">
+          Description is required
+        </div>
       </div>
     </form>
-    <div class="modalBtn d-flex gap-3 mt-5"> 
-      <button class="btn btn-success w-25" (click)="editProduct()" [disabled]="editForm.invalid">Save</button>
+    <div class="modalBtn d-flex gap-3 mt-5">
+      <button class="btn btn-success w-25" (click)="editProduct()" [disabled]="editForm.invalid">
+        Save
+      </button>
       <button class="btn btn-secondary w-25" (click)="closeEditModal()">Cancel</button>
     </div>
   </div>
- </div>
-
-
+</div>
 
 <!-- cards -->
 
-<div class="products-container d-flex flex-wrap gap-5   " *ngIf="!loading">
+<!-- <div class="products-container d-flex flex-wrap gap-5   " *ngIf="!loading">
    <div *ngFor="let product of products" class="customCard card  d-flex flex-column gap-3 p-5">
     <img [src]="product.image" alt="{{ product.title }}" class="imgProduct " />
     <h3>{{ product.title }}</h3>
@@ -94,19 +107,27 @@
       <button class="btn bg-danger text-white w-50 " (click)="openDeleteModal(product.id)">🗑️  Delete</button>
     </div>
   </div>
-  </div>
+  </div> -->
 
-  <!-- delete modal -->
+<!-- card component -->
+<div class="products-container d-flex flex-wrap gap-5" *ngIf="!loading">
+  <app-product-component
+    *ngFor="let product of products"
+    [product]="product"
+    (edit)="openEditModal(product)"
+    (delete)="openDeleteModal(product.id)"
+  >
+  </app-product-component>
+</div>
+
+<!-- delete modal -->
 <div class="modal-backdrop" *ngIf="showDeleteModal">
   <div class="modal-box">
+    <p>Do you really want to delete this product?</p>
 
-    <p>
-      Do you really want to delete this product?
-    </p>
-
-    <div class="buttonCard d-flex gap-3 ">
-      <button class="btn bg-secondary text-white w-50 " (click)="deleteProduct()">Yes</button>
-      <button class="btn bg-danger text-white w-50 " (click)="closeDeleteModal()">NO</button>
+    <div class="buttonCard d-flex gap-3">
+      <button class="btn bg-secondary text-white w-50" (click)="deleteProduct()">Yes</button>
+      <button class="btn bg-danger text-white w-50" (click)="closeDeleteModal()">NO</button>
     </div>
   </div>
 </div>
