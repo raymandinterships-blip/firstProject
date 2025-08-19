@@ -91,7 +91,22 @@
     <p>{{ product.description }}</p>
     <div class="buttonCard d-flex gap-3 ">
       <button class="btn bg-secondary text-white w-50 " (click)="openEditModal(product)">✏️ Edit</button>
-      <button class="btn bg-danger text-white w-50 " (click)="deleteProduct(product.id)">🗑️  Delete</button>
+      <button class="btn bg-danger text-white w-50 " (click)="openDeleteModal(product.id)">🗑️  Delete</button>
     </div>
   </div>
   </div>
+
+  <!-- delete modal -->
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="modal-box">
+
+    <p>
+      Do you really want to delete this product?
+    </p>
+
+    <div class="buttonCard d-flex gap-3 ">
+      <button class="btn bg-secondary text-white w-50 " (click)="deleteProduct()">Yes</button>
+      <button class="btn bg-danger text-white w-50 " (click)="closeDeleteModal()">NO</button>
+    </div>
+  </div>
+</div>

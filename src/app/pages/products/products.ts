@@ -28,6 +28,10 @@ export class Products implements OnInit {
   showEditModal=false;
   editProductData={id:'',title:'',description:'',image:''}
 
+  // delete modal
+  showDeleteModal=false;
+  deleteProductId:string | null=null;
+
 
   constructor(private productservice:Productservice){}
 
@@ -101,10 +105,24 @@ export class Products implements OnInit {
     })
     
   }
+// open delete modal
+  openDeleteModal(id:string){
+    this.deleteProductId=id;
+    this.showDeleteModal=true;
 
-  deleteProduct(id:string):void{
-    this.productservice.delete(id).subscribe(()=>{
-      this.products=this.products.filter(p=>p.id !==id)
-    })
+  }
+// close delete modal
+  closeDeleteModal(){
+    this.showDeleteModal=false;
+    this.deleteProductId=null;
+  }
+
+  deleteProduct(){
+    if(this.deleteProductId){
+      this.productservice.delete(this.deleteProductId).subscribe(()=>{
+      this.products=this.products.filter(p=>p.id !== this.deleteProductId)
+      this.closeDeleteModal()
+      })
+    }
   }
 }
