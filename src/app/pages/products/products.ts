@@ -4,6 +4,8 @@ import { Product, Productservice } from '../../services/productservice';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from '../../components/product-component/product-component';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-products',
@@ -33,12 +35,19 @@ export class Products implements OnInit {
   showDeleteModal = false;
   deleteProductId: string | null = null;
 
-  constructor(private productservice: Productservice) {}
+  constructor(
+    private productservice: Productservice,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
-
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
   getProducts(): void {
     this.loading = true;
     this.productservice.getAll().subscribe({
