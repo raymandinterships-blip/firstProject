@@ -18,7 +18,8 @@
   border-radius: 5px;
   position: fixed;
   top: 50px;
-  left: 5px;
+  left: 0px;
+  
 }
 
 .toast-warning {
@@ -29,7 +30,8 @@
   border-radius: 5px;
   position: fixed;
   top: 50px;
-  left: 5px;
+  left: 0px;
+  
 }
 
 .toast-info {
@@ -40,5 +42,6 @@
   border-radius: 5px;
   position: fixed;
   top: 50px;
-  left: 5px;
+  left: 0px;
+  
 }

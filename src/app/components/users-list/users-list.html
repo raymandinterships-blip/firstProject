@@ -1,0 +1,27 @@
+<div *ngIf="loading">در حال بارگذاری...</div>
+
+<table
+  *ngIf="!loading && users.length > 0"
+  class="table table-light table-bordered mt-5 mx-auto table-striped w-75 text-center table-hover"
+>
+  <thead>
+    <tr>
+      <th>شماره تماس</th>
+      <th>ایمیل</th>
+      <th>نام خانوادگی</th>
+      <th>نام</th>
+      <th>ردیف</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.phone_number }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.l_name }}</td>
+      <td>{{ user.f_name }}</td>
+      <td>{{ user.id }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!loading && users.length === 0">هیچ کاربری یافت نشد.</div>
