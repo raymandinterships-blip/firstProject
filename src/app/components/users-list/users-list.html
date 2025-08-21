@@ -6,7 +6,8 @@
 >
   <thead>
     <tr>
-      <th>شماره تماس</th>
+        <th>شماره داخلی</th>
+      <th>شماره موبایل</th>
       <th>ایمیل</th>
       <th>نام خانوادگی</th>
       <th>نام</th>
@@ -15,6 +16,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let user of users">
+        <td>{{user.internal_number}}</td>
       <td>{{ user.phone_number }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.l_name }}</td>
