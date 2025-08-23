@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { UsersList } from "../../components/users-list/users-list";
+import { UserManagementComponent } from '../../user-management-component/user-management-component';
 
 @Component({
   selector: 'app-home',
-  imports: [UsersList],
+  imports: [UserManagementComponent],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
-export class Home {
-
-}
+export class Home {}

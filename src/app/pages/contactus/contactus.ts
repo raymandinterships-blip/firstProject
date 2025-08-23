@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { UserManagementComponent } from '../../user-management-component/user-management-component';
 
 @Component({
   selector: 'app-contactus',
-  imports: [],
+  imports: [UserManagementComponent],
   templateUrl: './contactus.html',
-  styleUrl: './contactus.css'
+  styleUrl: './contactus.css',
 })
-export class Contactus {
-
-}
+export class Contactus {}

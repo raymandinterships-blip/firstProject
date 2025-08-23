@@ -1,29 +1,27 @@
-<div *ngIf="loading">در حال بارگذاری...</div>
+<div *ngIf="loading" class="text-center my-3">در حال بارگذاری...</div>
 
-<table
-  *ngIf="!loading && users.length > 0"
-  class="table table-light table-bordered mt-5 mx-auto table-striped w-75 text-center table-hover"
+<div class="w-75 mx-auto mt-3 d-flex justify-content-between">
+  <input
+    type="text"
+    class="form-control w-25"
+    placeholder="جستجو..."
+    [(ngModel)]="searchText"
+    (input)="onSearch()"
+  />
+  <button class="btn btn-success" (click)="onAddUser()">افزودن کاربر جدید</button>
+</div>
+
+<app-generic-grid
+  *ngIf="!loading"
+  [data]="users"
+  [columns]="columns"
+  [totalCount]="total"
+  [pageCount]="page"
+  [perPage]="perPage"
+  (pageChange)="onPageChange($event.pageIndex + 1)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
 >
-  <thead>
-    <tr>
-        <th>شماره داخلی</th>
-      <th>شماره موبایل</th>
-      <th>ایمیل</th>
-      <th>نام خانوادگی</th>
-      <th>نام</th>
-      <th>ردیف</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-        <td>{{user.internal_number}}</td>
-      <td>{{ user.phone_number }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.l_name }}</td>
-      <td>{{ user.f_name }}</td>
-      <td>{{ user.id }}</td>
-    </tr>
-  </tbody>
-</table>
+</app-generic-grid>
 
-<div *ngIf="!loading && users.length === 0">هیچ کاربری یافت نشد.</div>
+<div *ngIf="!loading && users.length === 0" class="text-center mt-3">هیچ کاربری یافت نشد.</div>
