@@ -11,9 +11,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 
-// import {ConfirmationModalComponent} from '../../../widgets/modals/confirmation-modal/confirmation-modal.component';
 import { HttpService } from '../services/http-service';
-// import { UserFormComponent } from '../user-form-component/user-form-component';
 import {
   FilterValue,
   GenericGridComponent,
@@ -226,13 +224,11 @@ export class UserManagementComponent implements OnInit, AfterViewInit {
   onUserSaved(): void {
     this.modalService.dismissAll();
     this.loadUsers();
-    
   }
 
   closeModal(): void {
     this.modalService.dismissAll();
   }
-
   openDeleteModal(user: any) {
     this.selectedUser = user;
     this.showModalDelete = true;

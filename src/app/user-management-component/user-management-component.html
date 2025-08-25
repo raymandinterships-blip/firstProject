@@ -6,7 +6,7 @@
       >
         <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>مدیریت کاربران</h4>
         <button class="btn btn-success btn-sm" (click)="openAddUserDialog()">
-          <i class="bi bi-plus-lg me-1"></i> کاربر جدید
+          <i class="bi bi-plus-lg me-1"></i> + کاربر جدید
         </button>
       </div>
       <app-generic-grid
@@ -23,7 +23,7 @@
         (sortChange)="onSortChange($event)"
         (searchChange)="onSearchChange($event)"
         (filterChange)="onFilterChange($event)"
-        (delete)="deleteUser($event)"
+        (delete)="openDeleteModal($event)"
         (edit)="editUser($event)"
       >
         <ng-template #genderTemplate let-user>
@@ -66,7 +66,12 @@
   </div>
 
   <div class="modal-body" style="max-height: 70vh; overflow-y: auto">
-    <app-user-form (saved)="onUserSaved()" (cancel)="closeModal()"></app-user-form>
+    <app-user-form
+      (saved)="onUserSaved()"
+      (cancel)="closeModal()"
+      [user]="selectedUser"
+      [isEditMode]="isEditMode"
+    ></app-user-form>
   </div>
 </ng-template>
 

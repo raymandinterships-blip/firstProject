@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  direction: rtl;
+}
 .toast-success {
   background-color: #28a745 !important;
   color: #fff !important;

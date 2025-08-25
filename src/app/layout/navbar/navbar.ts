@@ -13,10 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 export class Navbar {
   constructor(private router: Router, private toastr: ToastrService) {}
   navItems = [
-    { label: 'Home', link: 'home', active: true },
-    { label: 'About', link: 'about', active: false },
-    { label: 'Contact Us', link: 'contactus', active: false },
-    { label: 'Products', link: 'products', active: false },
+    { label: 'خانه', link: 'home', active: true },
+    { label: 'درباره ما', link: 'about', active: false },
+    { label: ' تماس با ما', link: 'contactus', active: false },
+    { label: 'محصولات', link: 'products', active: false },
   ];
   get isLoggedIn(): boolean {
     return !!sessionStorage.getItem('token');

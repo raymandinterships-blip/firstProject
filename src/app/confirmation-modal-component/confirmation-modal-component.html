@@ -1,16 +1,28 @@
-<div class="modal fade" [ngClass]="{'show d-block': isOpen}" tabindex="-1" role="dialog">
+<div class="modal fade" [ngClass]="{ 'show d-block': isOpen }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header d-flex">
         <h5 class="modal-title">{{ title }}</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+
+        <button
+          type="button"
+          class="btn border-0 bg-transparent text-danger fs-4 fw-bold"
+          (click)="onCancel()"
+          aria-label="Close"
+        >
+          ×
+        </button>
       </div>
       <div class="modal-body">
         <p>{{ message }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-{{ cancelButtonColor }}" (click)="onCancel()">{{ cancelButtonText }}</button>
-        <button type="button" class="btn btn-{{ confirmButtonColor }}" (click)="onConfirm()">{{ confirmButtonText }}</button>
+        <button type="button" class="btn btn-{{ cancelButtonColor }}" (click)="onCancel()">
+          {{ cancelButtonText }}
+        </button>
+        <button type="button" class="btn btn-{{ confirmButtonColor }}" (click)="onConfirm()">
+          {{ confirmButtonText }}
+        </button>
       </div>
     </div>
   </div>

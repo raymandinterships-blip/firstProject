@@ -1,0 +1,11 @@
+.modal-header{
+    justify-content: space-between;
+  
+}
+  div{
+        border: none;
+    }
+    .modal-dialog{
+        border: 3px rgb(180, 162, 80) solid;
+        border-radius: 5px;
+    }

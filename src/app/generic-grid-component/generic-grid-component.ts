@@ -80,7 +80,7 @@ export class GenericGridComponent<T extends { id?: number }> implements OnInit, 
     this.setupFilters();
     this.cdr.detectChanges();
   }
-  onEdit(item: any) {
+  onEdit(item: T) {
     this.edit.emit(item);
   }
 

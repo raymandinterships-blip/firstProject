@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg p-3 d-flex">
+<nav class="navbar navbar-expand-lg p-5 d-flex">
+  <a href="https://raymandnet.ir/">
+    <img src="https://raymandnet.ir/wp-content/uploads/2021/01/logo-Raymandnet-1.png" alt="" />
+  </a>
   <button
     class="navbar-toggler"
     type="button"
@@ -12,12 +15,12 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto d-flex gap-3">
       <li *ngFor="let item of navItems" class="nav-item" [class.active]="item.active">
         <a class="nav-link" [href]="item.link">{{ item.label }}</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item">
-        <BUtton class="btn btn-danger  ms-5" (click)="logout()">Logout</BUtton>
+        <BUtton class="btn btn-danger ms-5" (click)="logout()">خروج کاربر</BUtton>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0 d-flex px-5 gap-5">
@@ -25,10 +28,10 @@
         id="input"
         class="form-control mr-sm-2"
         type="search"
-        placeholder="Search"
+        placeholder="جستجو..."
         aria-label="Search"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جستجو</button>
     </form>
   </div>
 </nav>

@@ -196,7 +196,7 @@
                   </span>
                 </ng-container>
               </td>
-              <td style="text-align: center">
+              <td class="d-flex gap-2">
                 <button
                   type="button"
                   class="btn btn-sm btn-outline-primary me-1"
@@ -208,7 +208,7 @@
                 <button
                   type="button"
                   class="btn btn-sm btn-outline-danger"
-                  (click)="onDelete(item)"
+                  (click)="delete.emit(item)"
                   title="حذف"
                 >
                   حذف
@@ -324,3 +324,4 @@
     </div>
   </nav>
 </div>
+

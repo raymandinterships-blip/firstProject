@@ -9,24 +9,19 @@ import {
 import { NgForOf, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-// import {JalaliDatetimePickerComponent} from '../../../widgets/jalali-datetime-picker/jalali-datetime-picker.component';
 import { UsersService } from '../services/users-service';
 import { HttpService } from '../services/http-service';
+import { JalaliDatetimePickerComponent } from '../jalali-datetime-picker/jalali-datetime-picker.component';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    // NgForOf,
-    NgIf,
-    // JalaliDatetimePickerComponent,
-  ],
+  imports: [ReactiveFormsModule, NgForOf, NgIf, JalaliDatetimePickerComponent],
   templateUrl: './user-form-component.html',
 })
 export class UserFormComponent implements OnInit {
   @Input() user: any;
-  @Input() isEditMode = false;
+  @Input() isEditMode: boolean = false;
   @Output() saved = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
@@ -66,6 +61,7 @@ export class UserFormComponent implements OnInit {
     this.initForm();
     this.loadRoles();
   }
+
   loadRoles(): void {
     this.httpService.get<any>('users/get-roles').subscribe({
       next: (response) => {
@@ -74,7 +70,9 @@ export class UserFormComponent implements OnInit {
           value: role.name,
         }));
       },
-      error: (err: HttpErrorResponse) => {},
+      error: (err: HttpErrorResponse) => {
+        console.error('خطا در بارگذاری نقش‌ها', err);
+      },
     });
   }
 
@@ -92,11 +90,13 @@ export class UserFormComponent implements OnInit {
       f_name: ['', Validators.required],
       l_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      role_name: ['', Validators.required],
+      role: ['', Validators.required],
       phone_number: ['', [Validators.required, Validators.pattern(/^(\+98|0)?9\d{9}$/)]],
       national_code: ['', Validators.required],
       birth_date: ['', Validators.required],
       date_employed: ['', Validators.required],
+      gender: ['', Validators.required],
+      internal_number: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // ← اضافه شد
     });
 
     if (this.isEditMode && this.user) {
@@ -112,18 +112,22 @@ export class UserFormComponent implements OnInit {
 
   onSubmit(): void {
     this.userForm.markAllAsTouched();
+
     if (this.userForm.invalid) return;
+
     const formValue = this.userForm.value;
     const formattedValue = {
       ...formValue,
       birth_date: formValue.birth_date?.replace(/\//g, '-') || '',
       date_employed: formValue.date_employed?.replace(/\//g, '-') || '',
+      internal_number_type: '1',
+
+      webrtc_username: '',
+      webrtc_password: '',
     };
-    console.log("value",formattedValue)
     const request$ = this.isEditMode
-      ? this.usersService.updateUser(this.user.id, formattedValue)
-      : this.usersService.addUser(formattedValue)
-    console.log('فرم معتبره، داده ارسال میشه:', formattedValue);
+      ? this.usersService.updateUser({ ...formattedValue, id: this.user.id })
+      : this.usersService.addUser(formattedValue);
 
     request$.subscribe({
       next: (res: any) => {
@@ -138,7 +142,7 @@ export class UserFormComponent implements OnInit {
           return;
         }
         this.toaster.success(
-          this.isEditMode ? 'user created successfully' : 'user edited seccssefully'
+          this.isEditMode ? 'user edited seccssefully' : 'user created successfully'
         );
         this.saved.emit();
       },

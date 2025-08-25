@@ -79,21 +79,24 @@ export class UsersService {
   }
 
   addUser(user: any): Observable<any> {
+    console.log('📤 درخواست ارسال شد:', user);
     const token = sessionStorage.getItem('token') || '';
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.post(this.baseUrl, user, { headers });
+    console.log('📤 ارسال درخواست به:', this.baseUrl, 'با هدر:', headers);
+
+    return this.http.post(this.baseUrl + '/create-user', user, { headers });
   }
 
-  updateUser(id: number, user: any): Observable<any> {
+  updateUser(user: any): Observable<any> {
     const token = sessionStorage.getItem('token') || '';
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.put(`${this.baseUrl}/${id}`, user, { headers });
+    return this.http.post(`${this.baseUrl + '/update-user'}`, user, { headers });
   }
 
   deleteUser(id: number): Observable<any> {

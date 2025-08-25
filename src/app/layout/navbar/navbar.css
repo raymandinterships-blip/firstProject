@@ -1,4 +1,9 @@
-.navbar{
-    justify-content: center;
-    align-items: center;
+.navbar {
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 252, 240);
+}
+li {
+  font-weight: bold;
+  font-size: large;
 }

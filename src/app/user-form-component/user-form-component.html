@@ -14,20 +14,24 @@
       </div>
     </div>
     <!-- نقش -->
-    <!-- <div class="col-md-6 col-12 mb-3">
-      <label class="form-label" for="role_name">نقش</label>
+    <div class="col-md-6 col-12 mb-3">
+      <label class="form-label" for="role">نقش</label>
       <select
         class="form-select"
-        id="role_name"
-        formControlName="role_name"
-        [class.is-invalid]="userForm.get('role_name')?.touched && userForm.get('role_name')?.invalid"
-        aria-label="نقش">
+        id="role"
+        formControlName="role"
+        [class.is-invalid]="userForm.get('role')?.touched && userForm.get('role')?.invalid"
+        aria-label="نقش"
+      >
         <option *ngFor="let role of roleOptions" [value]="role.value">{{ role.label }}</option>
       </select>
-      <div *ngIf="userForm.get('role_name')?.touched && userForm.get('role_name')?.invalid" class="text-danger">
-        <div *ngIf="userForm.get('role_name')?.errors?.['required']">نقش الزامی است.</div>
+      <div
+        *ngIf="userForm.get('role')?.touched && userForm.get('role')?.invalid"
+        class="text-danger"
+      >
+        <div *ngIf="userForm.get('role')?.errors?.['required']">نقش الزامی است.</div>
       </div>
-    </div> -->
+    </div>
     <div class="col-md-6 col-12 mb-3"></div>
     <!-- نام کاربری -->
     <div class="col-md-6 col-12 mb-3">
@@ -173,7 +177,7 @@
     </div>
 
     <!-- تاریخ تولد -->
-    <!-- <div class="col-md-6 col-12 mb-3">
+    <div class="col-md-6 col-12 mb-3">
       <label class="form-label" for="birth_date">تاریخ تولد</label>
       <app-jalali-datetime-picker
         [control]="birthDateControl"
@@ -181,13 +185,14 @@
         [format]="dateFormats"
         id="birth_date"
         placeholder="تاریخ تولد را انتخاب کنید"
-        aria-label="تاریخ تولد"></app-jalali-datetime-picker>
+        aria-label="تاریخ تولد"
+      ></app-jalali-datetime-picker>
       <div *ngIf="birthDateControl.touched && birthDateControl.invalid" class="text-danger">
         <div *ngIf="birthDateControl.errors?.['required']">تاریخ تولد الزامی است.</div>
       </div>
-    </div> -->
+    </div>
     <!-- تاریخ استخدام -->
-    <!-- <div class="col-md-6 col-12 mb-3">
+    <div class="col-md-6 col-12 mb-3">
       <label class="form-label" for="employed_date">تاریخ استخدام</label>
       <app-jalali-datetime-picker
         [control]="employedDateControl"
@@ -195,11 +200,56 @@
         [format]="dateFormats"
         id="employed_date"
         placeholder="تاریخ استخدام را انتخاب کنید"
-        aria-label="تاریخ استخدام"></app-jalali-datetime-picker>
+        aria-label="تاریخ استخدام"
+      ></app-jalali-datetime-picker>
       <div *ngIf="employedDateControl.touched && employedDateControl.invalid" class="text-danger">
         <div *ngIf="employedDateControl.errors?.['required']">تاریخ استخدام الزامی است.</div>
       </div>
-    </div> -->
+    </div>
+    <div class="col-md-6 col-12 mb-3">
+      <label class="form-label" for="gender">جنسیت</label>
+      <select
+        class="form-select"
+        id="gender"
+        formControlName="gender"
+        [class.is-invalid]="userForm.get('gender')?.touched && userForm.get('gender')?.invalid"
+        aria-label="جنسیت"
+      >
+        <option value="" disabled>انتخاب کنید</option>
+        <option value="male">مرد</option>
+        <option value="female">زن</option>
+        <option value="other">سایر</option>
+      </select>
+      <div
+        *ngIf="userForm.get('gender')?.touched && userForm.get('gender')?.invalid"
+        class="text-danger"
+      >
+        <div *ngIf="userForm.get('gender')?.errors?.['required']">جنسیت الزامی است.</div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-12 mb-3">
+      <label class="form-label" for="internal_number">شماره داخلی</label>
+      <input
+        type="text"
+        class="form-control"
+        id="internal_number"
+        formControlName="internal_number"
+        [class.is-invalid]="
+          userForm.get('internal_number')?.touched && userForm.get('internal_number')?.invalid
+        "
+        aria-label="شماره داخلی"
+      />
+      <div
+        *ngIf="userForm.get('internal_number')?.touched && userForm.get('internal_number')?.invalid"
+        class="text-danger"
+      >
+        <div *ngIf="userForm.get('internal_number')?.errors?.['required']">
+          شماره داخلی الزامی است.
+        </div>
+        <div *ngIf="userForm.get('internal_number')?.errors?.['pattern']">فقط عدد معتبر است.</div>
+      </div>
+    </div>
   </div>
   <div class="d-flex justify-content-end mt-4">
     <button type="submit" class="btn btn-success">ذخیره</button>
