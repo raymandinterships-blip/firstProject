@@ -90,7 +90,7 @@ export class UserFormComponent implements OnInit {
       f_name: ['', Validators.required],
       l_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      role: ['', Validators.required],
+      role_name: ['', Validators.required],
       phone_number: ['', [Validators.required, Validators.pattern(/^(\+98|0)?9\d{9}$/)]],
       national_code: ['', Validators.required],
       birth_date: ['', Validators.required],

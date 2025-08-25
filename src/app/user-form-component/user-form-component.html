@@ -15,21 +15,23 @@
     </div>
     <!-- نقش -->
     <div class="col-md-6 col-12 mb-3">
-      <label class="form-label" for="role">نقش</label>
+      <label class="form-label" for="role_name">نقش</label>
       <select
         class="form-select"
-        id="role"
-        formControlName="role"
-        [class.is-invalid]="userForm.get('role')?.touched && userForm.get('role')?.invalid"
+        id="role_name"
+        formControlName="role_name"
+        [class.is-invalid]="
+          userForm.get('role_name')?.touched && userForm.get('role_name')?.invalid
+        "
         aria-label="نقش"
       >
         <option *ngFor="let role of roleOptions" [value]="role.value">{{ role.label }}</option>
       </select>
       <div
-        *ngIf="userForm.get('role')?.touched && userForm.get('role')?.invalid"
+        *ngIf="userForm.get('role_name')?.touched && userForm.get('role_name')?.invalid"
         class="text-danger"
       >
-        <div *ngIf="userForm.get('role')?.errors?.['required']">نقش الزامی است.</div>
+        <div *ngIf="userForm.get('role_name')?.errors?.['required']">نقش الزامی است.</div>
       </div>
     </div>
     <div class="col-md-6 col-12 mb-3"></div>
