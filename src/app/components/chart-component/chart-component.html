@@ -1,0 +1,22 @@
+<div class="container   my-5">
+  <app-generic-chart-component
+    [endpoint]="'queues/queue-wallboard'"
+    [body]="{ period: 'monthly' }"
+    [chartTitle]="'آمار تماس‌های صف‌ها'"
+    [labelKeys]="['answered_calls', 'unanswered_calls']"
+    [datasetLabels]="['تماس‌های پاسخ داده‌شده', 'تماس‌های بی‌پاسخ']"
+    [colors]="['#5bc05eff', '#f44336']"
+  >
+    >
+  </app-generic-chart-component>
+   <app-generic-chart-component
+    [endpoint]="'queues/queue-wallboard'"
+    [body]="{ period: 'monthly' }"
+    [chartTitle]="'آمار تماس‌های روزانه'"
+    [labelKeys]="['answered_calls', 'unanswered_calls']"
+    [datasetLabels]="['تماس‌های پاسخ داده‌شده', 'تماس‌های بی‌پاسخ']"
+    [colors]="['blue', '#f44336']"
+  >
+    >
+  </app-generic-chart-component>
+</div>

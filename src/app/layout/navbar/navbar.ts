@@ -13,8 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class Navbar {
   constructor(private router: Router, private toastr: ToastrService) {}
   navItems = [
-    { label: 'خانه', link: 'home', active: true },
-    { label: 'درباره ما', link: 'about', active: false },
+    { label: 'کاربران', link: 'home', active: true },
+    { label: ' گزارشات آماری', link: 'about', active: false },
     { label: ' تماس با ما', link: 'contactus', active: false },
     { label: 'محصولات', link: 'products', active: false },
   ];
