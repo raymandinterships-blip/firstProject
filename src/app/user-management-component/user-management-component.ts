@@ -9,7 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, takeUntil } from 'rxjs';
+import { catchError, of, Subject, takeUntil } from 'rxjs';
 
 import { HttpService } from '../services/http-service';
 import {
@@ -153,7 +153,22 @@ export class UserManagementComponent implements OnInit, AfterViewInit {
     }
     this.httpService
       .get<any>(url)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => {
+          console.error('API Error:',err)
+          this.toaster.error('خطا در بارگذاری کاربران');
+          this.loading=false;
+          return of({
+            result:{
+              data:{
+                items:[],
+                _meta:{totalCount:0,perPage:this.pageSize,currentPage:this.pageIndex+1}
+              }
+            }
+          })
+        })
+      )
       .subscribe({
         next: (response) => {
           this.users = Array.isArray(response.result.data.items)
@@ -163,14 +178,8 @@ export class UserManagementComponent implements OnInit, AfterViewInit {
           this.pageSize = response.result.data._meta?.perPage || this.pageSize;
           this.pageIndex = (response.result.data._meta?.currentPage || 1) - 1;
           this.loading = false;
-        },
-        error: (error) => {
-          console.error('API Error:', error);
-          this.users = [];
-          this.totalCount = 0;
-          this.loading = false;
-          this.toaster.error('خطا در بارگذاری کاربران');
-        },
+        }
+      
       });
   }
 

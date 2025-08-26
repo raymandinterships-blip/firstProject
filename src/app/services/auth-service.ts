@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 export interface User {
   username: string;
@@ -8,11 +8,9 @@ export interface User {
   token: string;
   hasError: boolean;
   messages: [];
-  // id: string;
-  // lastName: string;
-  // email: string;
-  // phoneNumber: string;
-}
+
+  }
+
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +28,10 @@ export class AuthService {
         if (response && response.result?.token) {
           sessionStorage.setItem('token', response.result.token);
         }
+      }),
+      catchError(err=>{
+        console.error('Login error:',err)
+        return of({hasError:true,messages:['خطا در لاگین']})
       })
     );
   }

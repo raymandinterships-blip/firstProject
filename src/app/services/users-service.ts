@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { HttpService } from './http-service';
+import { User } from './auth-service';
 
 export interface GridResponse<T> {
   result: {
@@ -25,9 +26,9 @@ export interface GridResponse<T> {
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl = 'http://192.168.180.7:9000/users';
+  private baseUrl = 'users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpService: HttpService) {}
 
   getUsers(
     params: {
@@ -38,7 +39,7 @@ export class UsersService {
       search?: string;
       filters?: Record<string, string>;
     } = {}
-  ): Observable<{ items: any[]; total: number; meta: any }> {
+  ): Observable<{ items: User[]; total: number; meta: any }> {
     const {
       page = 1,
       perPage = 10,
@@ -61,12 +62,7 @@ export class UsersService {
       if (value) url += `&${key}=${encodeURIComponent(value)}`;
     });
 
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get<GridResponse<any>>(url, { headers }).pipe(
+    return this.httpService.get<GridResponse<User>>(url).pipe(
       map((response) => {
         const data = response?.result?.data;
         return {
@@ -78,33 +74,15 @@ export class UsersService {
     );
   }
 
-  addUser(user: any): Observable<any> {
-    console.log('📤 درخواست ارسال شد:', user);
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    console.log('📤 ارسال درخواست به:', this.baseUrl, 'با هدر:', headers);
-
-    return this.http.post(this.baseUrl + '/create-user', user, { headers });
+  addUser(user: User) {
+    return this.httpService.post(this.baseUrl + '/create-user', user);
   }
 
-  updateUser(user: any): Observable<any> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.post(`${this.baseUrl + '/update-user'}`, user, { headers });
+  updateUser(user: User) {
+    return this.httpService.post(`${this.baseUrl + '/update-user'}`, user);
   }
 
-  deleteUser(id: number): Observable<any> {
-    const token = sessionStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.delete(`${this.baseUrl}/${id}`, { headers });
+  deleteUser(id: number) {
+    return this.httpService.delete(`${this.baseUrl}/${id}`);
   }
 }
