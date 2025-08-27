@@ -1,0 +1,82 @@
+<div class="container mt-3">
+  <div class="row row-gap-4 mb-4">
+    <div
+      class="col-4"
+      *ngFor="let status of statuses"
+      (click)="filterMembers(status.key)"
+      style="cursor: pointer"
+    >
+      <div class="card text-center p-5" [ngClass]="status.color">
+        <h5>{{ status.label }}</h5>
+        <p>{{ getCount(status.key) }} نفر</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let member of filteredMembers">
+      <div class="card card-member text-center p-3">
+        <h6>{{ member.name }}</h6>
+        <p>وضعیت: {{ getStatusLabel(member) }}</p>
+        <p>تعداد تماس: {{ member.calls_taken }}</p>
+
+        <div class="d-flex gap-3">
+          <button
+            class="btn w-25"
+            [ngClass]="member.paused ? 'btn-secondary' : 'btn-warning'"
+            (click)="togglePause(member)"
+            [disabled]="member.status === 'offline'"
+          >
+            <ng-container *ngIf="!member.paused; else playIcon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                fill="currentColor"
+                class="bi bi-pause-circle"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                <path
+                  d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"
+                />
+              </svg>
+            </ng-container>
+            <ng-template #playIcon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                fill="currentColor"
+                class="bi bi-play-circle-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"
+                />
+              </svg>
+            </ng-template>
+          </button>
+          <button
+            class="btn w-25"
+            [ngClass]="member.status === 'online' ? 'btn-danger' : 'btn-success'"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-power"
+              viewBox="0 0 16 16"
+            >
+              <path d="M7.5 1v7h1V1z" />
+              <path
+                d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

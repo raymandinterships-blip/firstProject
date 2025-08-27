@@ -1,4 +1,4 @@
-<div class="container   my-5">
+<div class="container my-5">
   <app-generic-chart-component
     [endpoint]="'queues/queue-wallboard'"
     [body]="{ period: 'monthly' }"
@@ -9,14 +9,33 @@
   >
     >
   </app-generic-chart-component>
-   <app-generic-chart-component
-    [endpoint]="'queues/queue-wallboard'"
-    [body]="{ period: 'monthly' }"
-    [chartTitle]="'آمار تماس‌های روزانه'"
-    [labelKeys]="['answered_calls', 'unanswered_calls']"
-    [datasetLabels]="['تماس‌های پاسخ داده‌شده', 'تماس‌های بی‌پاسخ']"
-    [colors]="['blue', '#f44336']"
+  <app-generic-chart-component
+    [endpoint]="'queues/queue-summery'"
+    [body]="{
+      start_date: '2025-01-27 23:59:59',
+      end_date: '2025-08-27 23:59:59',
+      queue_name: 'queue-1'
+    }"
+    [chartTitle]="'خلاصه تماس‌های صف‌ها'"
+    [labelKeys]="[
+      'total_calls',
+      'answered_calls',
+      'unanswered_calls',
+      'abandon_calls',
+      'waiting_calls'
+    ]"
+    [datasetLabels]="['کل تماس‌ها', 'پاسخ داده‌شده', 'بی‌پاسخ', 'رها شده']"
+    [colors]="['#2196f3', '#4caf50', '#f44336', '#ff9800']"
   >
-    >
   </app-generic-chart-component>
 </div>
+
+<app-members-list-component
+  [endpoint]="'queues/queue-summery'"
+  [body]="{
+    start_date: '2025-01-27 23:59:59',
+    end_date: '2025-08-27 23:59:59',
+    queue_name: 'queue-1'
+  }"
+  [title]="'اعضای صف'"
+></app-members-list-component>

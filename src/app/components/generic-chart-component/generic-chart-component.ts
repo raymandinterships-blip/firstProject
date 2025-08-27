@@ -7,7 +7,7 @@ import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-generic-chart-component',
   standalone: true,
-  imports: [CommonModule,BaseChartDirective],
+  imports: [CommonModule, BaseChartDirective],
   templateUrl: './generic-chart-component.html',
   styleUrl: './generic-chart-component.css',
 })
@@ -34,12 +34,12 @@ export class GenericChartComponent implements OnInit {
   constructor(private httpService: HttpService) {}
   ngOnInit(): void {
     this.loadData();
-    setInterval(() => this.loadData(), 50000);
+    setInterval(() => this.loadData(), 100000);
   }
   loadData(): void {
     this.httpService.post<any>(this.endpoint, this.body).subscribe({
       next: (data) => {
-        const items: any[] = data?.result?.queues || [];
+        const items: any[] = data?.result?.queues || data?.result?.data?.queues || [];
         this.barChartData = {
           labels: items.map((i) => i.queue_name || 'نامشخص'),
           datasets: this.labelKeys.map((key, index) => ({

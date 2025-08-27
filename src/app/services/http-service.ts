@@ -58,4 +58,11 @@ export class HttpService {
       })
     )
   }
+
+  pauseMember(memberExtension:string,queueId:number){
+    return this.post<any>('agent/pause',{memberExtension:memberExtension,queueId:queueId})
+  }
+  resumeMember(memberExtension:string,queueId:number){
+    return this.post<any>('agent/resume',{memberExtension:memberExtension,queueId:queueId})
+  }
 }

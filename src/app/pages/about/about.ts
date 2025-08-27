@@ -4,9 +4,8 @@ import { ChartComponent } from '../../components/chart-component/chart-component
 @Component({
   selector: 'app-about',
   imports: [ChartComponent],
+  standalone: true,
   templateUrl: './about.html',
-  styleUrl: './about.css'
+  styleUrl: './about.css',
 })
-export class About {
-
-}
+export class About {}

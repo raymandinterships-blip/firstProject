@@ -1,0 +1,17 @@
+.container {
+  margin: 100px auto;
+}
+.card {
+  cursor: pointer;
+  transition: transform 0.2s;
+  height: 180px;
+
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+.card-member {
+  background-color: rgb(255, 228, 253);
+  border-radius: 5px;
+}
