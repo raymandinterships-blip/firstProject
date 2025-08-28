@@ -66,7 +66,8 @@ export class MembersListComponent implements OnInit {
     if (statusKey === 'all') return this.members.length;
     if (statusKey === 'online') return this.members.filter((m) => m.status === 'online').length;
     if (statusKey === 'offline') return this.members.filter((m) => m.status === 'offline').length;
-    if (statusKey === 'paused') return this.members.filter((m) =>m.status==='online'&& m.paused).length;
+    if (statusKey === 'paused')
+      return this.members.filter((m) => m.status === 'online' && m.paused).length;
     return 0;
   }
 

@@ -1,12 +1,19 @@
-<nav class="navbar navbar-expand-lg p-5 d-flex">
-  <a href="https://raymandnet.ir/">
-    <img src="https://raymandnet.ir/wp-content/uploads/2021/01/logo-Raymandnet-1.png" alt="" />
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 px-4">
+  <!-- لوگو -->
+  <a class="navbar-brand" href="https://raymandnet.ir/">
+    <img
+      src="https://raymandnet.ir/wp-content/uploads/2021/01/logo-Raymandnet-1.png"
+      alt="RaymandNet"
+      height="70"
+    />
   </a>
+
+  <!-- دکمه Toggle موبایل -->
   <button
     class="navbar-toggler"
     type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
     aria-label="Toggle navigation"
@@ -14,24 +21,38 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto d-flex gap-3">
-      <li *ngFor="let item of navItems" class="nav-item" [class.active]="item.active">
-        <a class="nav-link" [href]="item.link">{{ item.label }}</a>
+  <!-- منو -->
+  <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex gap-4">
+      <li
+        *ngFor="let item of navItems"
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a
+          class="nav-link fw-semibold fs-6 text-primary px-2 py-1 rounded hover-bg"
+          [routerLink]="item.link"
+          >{{ item.label }}</a
+        >
       </li>
+
+      <!-- دکمه خروج -->
       <li *ngIf="isLoggedIn" class="nav-item">
-        <BUtton class="btn btn-danger ms-5" (click)="logout()">خروج کاربر</BUtton>
+        <button class="btn btn-danger btn-sm ms-3">خروج کاربر</button>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 d-flex px-5 gap-5">
+
+    <!-- فرم جستجو -->
+    <form class="d-flex gap-2" role="search">
       <input
         id="input"
-        class="form-control mr-sm-2"
+        class="form-control"
         type="search"
         placeholder="جستجو..."
         aria-label="Search"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جستجو</button>
+      <button class="btn btn-outline-success" type="submit">جستجو</button>
     </form>
   </div>
 </nav>

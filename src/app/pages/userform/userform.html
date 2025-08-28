@@ -1,31 +1,61 @@
-<div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
   <form
     [formGroup]="myForm"
     (ngSubmit)="onSubmit()"
-    class="p-4 border bg-light rounded w-25 mx-auto"
+    class="p-5 shadow-lg rounded-4 bg-white w-100"
+    style="max-width: 400px"
   >
-    <div class="mb-3">
-      <label for="username">نام کاربری:</label>
-      <input id="username" formControlName="username" class="form-control" />
+    <h3 class="text-center mb-4 fw-bold text-primary">ورود کاربران</h3>
+
+    <!-- نام کاربری -->
+    <div class="mb-3 position-relative">
+      <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted">
+        <i class="bi bi-person-fill"></i>
+      </span>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        class="form-control ps-5"
+        placeholder="نام کاربری"
+      />
       <div
         *ngIf="myForm.get('username')?.invalid && myForm.get('username')?.touched"
-        class="text-danger"
+        class="text-danger mt-1 small"
       >
         نام کاربری خود را وارد کنید
       </div>
     </div>
 
-    <div class="mb-3">
-      <label for="password">رمز عبور:</label>
-      <input id="password" formControlName="password" class="form-control" type="password" />
+    <!-- رمز عبور -->
+    <div class="mb-4 position-relative">
+      <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted">
+        <i class="bi bi-lock-fill"></i>
+      </span>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="form-control ps-5"
+        placeholder="رمز عبور"
+      />
       <div
         *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched"
-        class="text-danger"
+        class="text-danger mt-1 small"
       >
         رمز عبور را وارد کنید
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary w-50" [disabled]="myForm.invalid">ارسال</button>
+    <!-- دکمه ارسال -->
+    <div class="d-grid mb-3">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="myForm.invalid">ورود</button>
+    </div>
+
+    <div class="text-center">
+      <a routerLink="/forgot-password" class="text-decoration-none text-muted small">
+        فراموشی رمز عبور؟
+      </a>
+    </div>
   </form>
 </div>

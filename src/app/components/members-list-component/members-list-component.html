@@ -23,7 +23,7 @@
         <div class="d-flex gap-3">
           <button
             class="btn w-25"
-            [ngClass]="member.paused ? 'btn-secondary' : 'btn-warning'"
+            [ngClass]="!member.paused ? 'btn-secondary' : 'btn-warning'"
             (click)="togglePause(member)"
             [disabled]="member.status === 'offline'"
           >
